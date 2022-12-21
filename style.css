@@ -12,6 +12,10 @@
 }
 
 #calculator-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
     position: relative;
     height: 25%;
     width: 80%;
@@ -21,6 +25,19 @@
     top: 10%;
 }
 
+#previous-input-container {
+    background-color: aquamarine;
+    height: 40%;
+    width: 50%;
+    text-align: right;
+}
+
+#present-input-container {
+    background-color: azure;
+    height: 60%;
+    width: 50%;
+    text-align: right;
+}
 #calculator-buttons-container {
     position: relative;
     display: grid;
@@ -30,7 +47,7 @@
     top: 10%;
 }
 
-.calculator-button {
+.calculator-button, .operator-button, #calculator-button-equals {
     padding: 20px;
 }
 
