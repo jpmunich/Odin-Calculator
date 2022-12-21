@@ -45,5 +45,7 @@ equalsButton.addEventListener("click", function() {
 // Clears calculator
 clearCalculatorButton.addEventListener("click", function() {
   input.innerText = "";
+  previousInput.innerText = "";
+  operator = null;
 });
 
