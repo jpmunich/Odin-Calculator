@@ -25,12 +25,14 @@ for (let i = 0; i < calculatorButtons.length; i++) {
 // Set the operator based on the operator button clicked
 for (let i = 0; i < operatorButtons.length; i++) {
   operatorButtons[i].addEventListener("click", function() {
-    if (previousInput != "") {
-        operate();
-    }
+    if (input.innerText !== "" || previousInput !== "") {
+        if (previousInput != "") {
+            operate();
+        }
     operator = operatorButtons[i].value;
     previousInput.innerText = input.innerText;
     input.innerText = "";
+        }
   });
 }
 
@@ -39,24 +41,29 @@ function operate() {
     const firstInput = parseFloat(previousInput.innerText);
     const secondInput = parseFloat(input.innerText);
   
-    if (operator === "+") {
-      input.innerText = Math.round((firstInput + secondInput) * 100)/100;
-    } else if (operator === "-") {
-      input.innerText = Math.round((firstInput - secondInput) * 100)/100;
-    } else if (operator === "*") {
-      input.innerText = Math.round((firstInput * secondInput) * 100)/100;
-    } else if (operator === "/") {
-        if (secondInput !== 0) {
-      input.innerText = Math.round((firstInput / secondInput) * 100)/100;
-        }
-        else {
-            input.innerText = "Cannot divide by 0, clear calculator";
+    if (!isNaN(firstInput) && !isNaN(secondInput)) {
+        if (operator === "+") {
+          input.innerText = Math.round((firstInput + secondInput) * 100)/100;
+        } else if (operator === "-") {
+          input.innerText = Math.round((firstInput - secondInput) * 100)/100;
+        } else if (operator === "*") {
+          input.innerText = Math.round((firstInput * secondInput) * 100)/100;
+        } else if (operator === "/") {
+            if (secondInput !== 0) {
+          input.innerText = Math.round((firstInput / secondInput) * 100)/100;
+            }
+            else {
+                input.innerText = "Cannot divide by 0, clear calculator";
+            }
         }
     }
 }
 
 // When the equals button is pressed the expression is evaluated
 equalsButton.addEventListener("click", operate);
+equalsButton.addEventListener("click", function(){
+    previousInput.innerText = "";
+})
 
 // Clears calculator
 clearCalculatorButton.addEventListener("click", function() {
