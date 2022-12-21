@@ -12,14 +12,22 @@ const clearCalculatorButton = document.getElementById("calculator-button-clear")
 
 // Iterates through each button to allow user to type
 for (let i = 0; i < calculatorButtons.length; i++) {
-  calculatorButtons[i].addEventListener("click", function() {
-    input.innerText += calculatorButtons[i].value;
-  });
-}
+    calculatorButtons[i].addEventListener("click", function() {
+      // Check if the input already contains a decimal point
+      if (calculatorButtons[i].value === "." && input.innerText.includes(".")) {
+        // Ignore button press if input already contains a decimal point
+        return;
+      }
+      input.innerText += calculatorButtons[i].value;
+    });
+  }
 
 // Set the operator based on the operator button clicked
 for (let i = 0; i < operatorButtons.length; i++) {
   operatorButtons[i].addEventListener("click", function() {
+    if (previousInput != "") {
+        operate();
+    }
     operator = operatorButtons[i].value;
     previousInput.innerText = input.innerText;
     input.innerText = "";
@@ -32,13 +40,18 @@ function operate() {
     const secondInput = parseFloat(input.innerText);
   
     if (operator === "+") {
-      input.innerText = firstInput + secondInput;
+      input.innerText = Math.round((firstInput + secondInput) * 100)/100;
     } else if (operator === "-") {
-      input.innerText = firstInput - secondInput;
+      input.innerText = Math.round((firstInput - secondInput) * 100)/100;
     } else if (operator === "*") {
-      input.innerText = firstInput * secondInput;
+      input.innerText = Math.round((firstInput * secondInput) * 100)/100;
     } else if (operator === "/") {
-      input.innerText = firstInput / secondInput;
+        if (secondInput !== 0) {
+      input.innerText = Math.round((firstInput / secondInput) * 100)/100;
+        }
+        else {
+            input.innerText = "Cannot divide by 0, clear calculator";
+        }
     }
 }
 
@@ -51,4 +64,3 @@ clearCalculatorButton.addEventListener("click", function() {
   previousInput.innerText = "";
   operator = null;
 });
-
