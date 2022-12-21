@@ -27,20 +27,23 @@ for (let i = 0; i < operatorButtons.length; i++) {
 }
 
 // Processes the input and evaluates the expression
-equalsButton.addEventListener("click", function() {
-  const firstInput = parseFloat(previousInput.innerText);
-  const secondInput = parseFloat(input.innerText);
+function operate() {
+    const firstInput = parseFloat(previousInput.innerText);
+    const secondInput = parseFloat(input.innerText);
+  
+    if (operator === "+") {
+      input.innerText = firstInput + secondInput;
+    } else if (operator === "-") {
+      input.innerText = firstInput - secondInput;
+    } else if (operator === "*") {
+      input.innerText = firstInput * secondInput;
+    } else if (operator === "/") {
+      input.innerText = firstInput / secondInput;
+    }
+}
 
-  if (operator === "+") {
-    input.innerText = firstInput + secondInput;
-  } else if (operator === "-") {
-    input.innerText = firstInput - secondInput;
-  } else if (operator === "*") {
-    input.innerText = firstInput * secondInput;
-  } else if (operator === "/") {
-    input.innerText = firstInput / secondInput;
-  }
-});
+// When the equals button is pressed the expression is evaluated
+equalsButton.addEventListener("click", operate);
 
 // Clears calculator
 clearCalculatorButton.addEventListener("click", function() {
