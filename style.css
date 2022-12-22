@@ -6,6 +6,24 @@
     color: white;
 }
 
+h1, h4 {
+    position: relative;
+    left: 15%;
+    padding-top: 5%;
+}
+
+h4 {
+    padding-top: 1%;
+}
+
+h3 {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+}
+
 body {
     background-color: black;
 }
